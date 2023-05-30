@@ -14,4 +14,4 @@ movieRoutes.get("", listMovieController)
 movieRoutes.patch("/:id", ensureAuthMiddleware, ensureDataIsValidMiddleware(movieSchemaUpdate), updateMovieController)
 movieRoutes.delete("/:id", ensureIsOwnerMiddleware, deleteMovieController)
 
-export {movieRoutes}
+export { movieRoutes }

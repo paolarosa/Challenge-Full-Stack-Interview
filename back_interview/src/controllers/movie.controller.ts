@@ -7,7 +7,7 @@ import { deleteMovieService } from "../services/movies/deleteMovie.service"
 
 
 const createMovieController = async (req: Request, res: Response) => {
-    const userId = res.locals.clientId
+    const userId = res.locals.userId
     const newMovie = await createMovieService(req.body, userId)
     return res.status(201).json(newMovie)
 }
@@ -31,4 +31,4 @@ const deleteMovieController = async (req: Request, res: Response) => {
     res.status(204).send()
 }
 
-export {createMovieController, listMovieController,updateMovieController, deleteMovieController}
+export { createMovieController, listMovieController, updateMovieController, deleteMovieController }

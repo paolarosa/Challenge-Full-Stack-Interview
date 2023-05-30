@@ -5,7 +5,7 @@ import { LoginRequest } from "../../interfaces/login.interfaces"
 import jwt from "jsonwebtoken"
 import { User } from "../../entities/user.entitie"
 
-const createTokenService = async ({email, password}: LoginRequest): Promise<string> =>{
+const createTokenService = async ({ email, password }: LoginRequest): Promise<string> => {
     const userRepository = AppDataSource.getRepository(User)
     const user = await userRepository.findOne({
         where: {
@@ -13,15 +13,15 @@ const createTokenService = async ({email, password}: LoginRequest): Promise<stri
         }
     })
 
-    if(!user){
+    if (!user) {
         throw new AppError("Invalid credentials", 403)
     }
     const passwordMatch = await compare(password, user.password)
-    if(!passwordMatch){
+    if (!passwordMatch) {
         throw new AppError("Invalid credentials", 403)
     }
     const token = jwt.sign(
-        {clientName: user.name},
+        { userName: user.name },
         process.env.SECRET_KEY!,
         {
             expiresIn: "1h",
@@ -31,4 +31,4 @@ const createTokenService = async ({email, password}: LoginRequest): Promise<stri
     return token
 }
 
-export {createTokenService}
+export { createTokenService }

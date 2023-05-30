@@ -16,7 +16,7 @@ const listMoviesService = async (userId: string): Promise<MoviesResponse> => {
         id: userId
     })
 
-    if(!user){
+    if (!user) {
         throw new AppError("User not found", 404)
     }
 
@@ -25,7 +25,6 @@ const listMoviesService = async (userId: string): Promise<MoviesResponse> => {
             user: user
         }
     })
-
     return moviesSchemaResponse.parse(movie)
 
 }
